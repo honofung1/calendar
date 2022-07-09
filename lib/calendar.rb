@@ -42,6 +42,7 @@ class Calendar < Struct.new(:view, :date, :callback)
     classes.empty? ? nil : classes.join(' ')
   end
 
+  # header class
   def header_classes(week_day)
     classes = []
     classes << 'header'
