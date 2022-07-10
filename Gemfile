@@ -38,7 +38,7 @@ gem 'jquery-ui-rails'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 group :production do
-  # gem 'pg'
+  gem 'pg'
 end
 
 group :development, :test do
