@@ -22,3 +22,49 @@
     <% end %>
   </div>
 </div>
+
+<div class="row">
+  <div class="col-md-4 calendar_control">
+	<div class="schedule">
+    今後の活動一覧
+    <table id="schedule" class="table schedule">
+      <thead class="thead-light">
+        <tr>
+          <th>日程</th>
+          <th>活動</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div id='dialog' style='display: none;'>
+  <input id="input1" type="text" />
+</div>
+
+<% content_for :inline_javascript do %>
+  <script>
+    $(".calendar").on("click", "td", function() {
+      if($(this).is(".not-month")) return; // Block the other month
+      var date = $(this).text().trim();
+      var yearmonth = '<%= @date.year%>' + '-' + '<%= @date.strftime("%m") %>' + '-' + date;
+      $("#dialog").dialog({
+        modal:true,
+        title:"活動",
+        buttons: {
+        "確認": function() {
+          var row = '<tr><td>' + yearmonth + '</td><td>' + $("#input1").val() + '</tr>';
+          $('#schedule > tbody').append(row);
+          $(this).dialog("close");
+          $("#input1").val("");
+          },
+        "キャンセル": function() {
+          $(this).dialog("close"); 
+          }
+        }
+      });
+    });
+  </script>
+<% end %>
